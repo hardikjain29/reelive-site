@@ -88,6 +88,83 @@
   color: var(--pink);
   font-weight: 600;
 }
+/* Above the grid: "You add 25" and "Reelive picks 9". The picks label lights up
+   with the tiles (same 6 s loop, from the first lit column), the other one steps back. */
+.r-gridhead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 470px;
+}
+.r-gridhead .r-label b {
+  color: inherit;
+}
+.r-add {
+  animation: addLabel 6s infinite both;
+}
+.r-picks {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  animation: picksLabel 6s infinite both;
+  animation-delay: 0.22s;
+}
+.r-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--pink);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  animation: picksDot 6s infinite both;
+  animation-delay: 0.22s;
+}
+@keyframes addLabel {
+  0%,
+  14% {
+    color: rgba(235, 235, 245, 0.85);
+  }
+  32%,
+  78% {
+    color: rgba(235, 235, 245, 0.4);
+  }
+  94%,
+  100% {
+    color: rgba(235, 235, 245, 0.85);
+  }
+}
+@keyframes picksLabel {
+  0%,
+  14% {
+    color: rgba(235, 235, 245, 0.35);
+  }
+  32%,
+  78% {
+    color: var(--pink);
+  }
+  94%,
+  100% {
+    color: rgba(235, 235, 245, 0.35);
+  }
+}
+@keyframes picksDot {
+  0%,
+  14% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  32%,
+  78% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  94%,
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
 .r-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -667,7 +744,8 @@
     flex-direction: column;
     gap: 20px;
   }
-  .r-grid {
+  .r-grid,
+  .r-gridhead {
     width: 100%;
     gap: 7px;
   }
@@ -771,5 +849,11 @@
   }
   .r-head {
     display: none;
+  }
+  .r-add {
+    color: rgba(235, 235, 245, 0.4);
+  }
+  .r-picks {
+    color: var(--pink);
   }
 }

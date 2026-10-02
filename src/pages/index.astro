@@ -81,7 +81,12 @@ const faq = [
         </figcaption>
         <div class="r-stage" aria-hidden="true">
           <div class="r-fig">
-            <p class="r-label">What you add</p>
+            <div class="r-gridhead">
+              <p class="r-label r-add">You add <b>{tiles.length}</b></p>
+              <p class="r-label r-picks">
+                <span class="r-dot"><Icon name="check" size={10} bold /></span>Reelive picks <b>{tiles.filter((t) => t.on).length}</b>
+              </p>
+            </div>
             <div class="r-grid">
               {
                 tiles.map((t) => (
@@ -98,9 +103,9 @@ const faq = [
             </div>
           </div>
           <div class="r-flow">
-            <span>Reelive picks</span>
+            <span>Made into</span>
             <svg class="r-arrow ic" viewBox="0 0 96 20"><path d="M2 10h88"></path><path d="M82 3l8 7-8 7"></path></svg>
-            <span>and cuts</span>
+            <span>a reel</span>
           </div>
           <div class="r-fig">
             <p class="r-label"><b>What you get</b></p>

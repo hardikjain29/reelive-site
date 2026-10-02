@@ -17,12 +17,11 @@ export const SITE = {
 
 /**
  * Who runs Reelive, for the Impressum, the Privacy Policy and the Terms.
- * Bracketed values are placeholders: fill them in before going live.
  */
 export const OPERATOR = {
   name: 'Hardik Jain',
-  street: '[Street and number]',
-  city: '[Postcode and city]',
+  street: 'Palisadenstr. 42',
+  city: '10243 Berlin',
   country: 'Germany',
   email: 'support@reelive.app',
   /** Optional, but a second quick way to reach us besides email is recommended for the Impressum. */
@@ -30,9 +29,9 @@ export const OPERATOR = {
   /** USt-IdNr or Wirtschafts-ID, only if one has been issued. */
   vatId: null as string | null,
   /** The data protection authority of the Land the operator lives in. */
-  authority: '[Data protection authority of your Land]',
+  authority: 'the Berliner Beauftragte für Datenschutz und Informationsfreiheit, Alt-Moabit 59–61, 10555 Berlin',
   /** Court for disputes with merchants (not consumers): the operator's city. */
-  courtCity: '[City]',
+  courtCity: 'Berlin',
 } as const;
 
 /** Fair-use limits for Pro (the backend's PRO_DAILY_REEL_CAP and PRO_MAX_ACTIVE_REELS). */

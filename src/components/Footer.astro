@@ -1,0 +1,43 @@
+---
+import Logo from './Logo.astro';
+import { SITE } from '../site';
+---
+
+<footer class="r-foot">
+  <div class="r-wrap">
+    <div class="r-fgrid">
+      <div>
+        <a class="r-home" href="/" aria-label="Reelive home"><Logo scale={0.9} /></a>
+        <p class="r-tag">Add all your photos. We’ll make the reel. {SITE.appStoreLive ? 'On the App Store.' : 'Coming soon to iPhone.'}</p>
+      </div>
+      <nav aria-label="Product">
+        <h2>Product</h2>
+        <ul>
+          <li><a href="/#how">How it works</a></li>
+          <li><a href="/#templates">Templates</a></li>
+          <li><a href="/#pricing">Pricing</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Support">
+        <h2>Support</h2>
+        <ul>
+          <li><a href="/support">Help and FAQ</a></li>
+          <li><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></li>
+          <li><a href="/delete-account">Delete account</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Legal">
+        <h2>Legal</h2>
+        <ul>
+          <li><a href="/privacy">Privacy</a></li>
+          <li><a href="/terms">Terms</a></li>
+          <li><a href="/impressum">Impressum</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="r-fbottom">
+      <span>© {new Date().getFullYear()} Reelive</span>
+      <a href={`mailto:${SITE.supportEmail}`} style="text-decoration:none">{SITE.supportEmail}</a>
+    </div>
+  </div>
+</footer>

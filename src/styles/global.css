@@ -1,0 +1,362 @@
+/*
+ * Reelive's web look: the app's palette (reelation-app/lib/theme.ts) on near-black,
+ * Instrument Sans, hot pink as the only accent. Dark only, like the app.
+ */
+:root {
+  --bg: #09090b;
+  --card: #0f0f12;
+  --text: #f5f5f7;
+  --muted: rgba(235, 235, 245, 0.64);
+  --faint: rgba(235, 235, 245, 0.5);
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.12);
+  --pink: #ff4f97;
+  --pink-fill: #d1226b;
+  --pink-soft: rgba(255, 79, 151, 0.14);
+  --font: 'Instrument Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  background: var(--bg);
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+img,
+svg {
+  display: block;
+}
+a {
+  color: inherit;
+}
+::selection {
+  background: rgba(255, 79, 151, 0.35);
+}
+:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+[id] {
+  scroll-margin-top: 88px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.skip {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 10;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--pink-fill);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.skip:focus {
+  top: 12px;
+}
+
+/* Icons (lucide-style strokes). */
+.ic {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex: none;
+}
+.ic.bold {
+  stroke-width: 3;
+}
+
+/* Layout + shared pieces */
+.r-wrap {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+.r-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  border-bottom: 1px solid var(--line);
+  background: rgba(9, 9, 11, 0.8);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  backdrop-filter: blur(16px) saturate(1.4);
+}
+.r-nav {
+  display: flex;
+  align-items: center;
+  height: 68px;
+  gap: 36px;
+}
+.r-home {
+  display: inline-flex;
+  border-radius: 8px;
+}
+.r-links {
+  display: flex;
+  gap: 28px;
+  color: var(--muted);
+  font-size: 15px;
+  font-weight: 500;
+  flex: 1;
+}
+.r-links a {
+  text-decoration: none;
+}
+.r-links a:hover {
+  color: var(--text);
+}
+.r-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.r-btn.lg {
+  height: 52px;
+  padding: 0 24px;
+  font-size: 16px;
+}
+.r-primary {
+  background: var(--pink-fill);
+  color: #fff;
+}
+.r-primary:hover {
+  background: #b81c5d;
+}
+.r-primary[aria-disabled='true'] {
+  cursor: default;
+}
+.r-outline {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--text);
+}
+.r-outline:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.r-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(235, 235, 245, 0.6);
+  margin: 0;
+}
+.r-label.pink {
+  color: var(--pink);
+}
+.r-ok {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 79, 151, 0.16);
+  color: var(--pink);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+
+/* Footer */
+.r-foot {
+  margin-top: 128px;
+  border-top: 1px solid var(--line);
+}
+.r-fgrid {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  padding: 52px 0;
+}
+.r-fgrid h2 {
+  margin: 0 0 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.r-fgrid ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.r-fgrid a {
+  text-decoration: none;
+}
+.r-fgrid a:hover {
+  color: var(--text);
+}
+.r-tag {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 16px 0 0;
+  max-width: 280px;
+}
+.r-fbottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 0 44px;
+  border-top: 1px solid var(--line);
+  color: var(--faint);
+  font-size: 14px;
+}
+
+/* The phone frame and the reel playing in it: six stills cross-fading every 2.4 s. */
+.phone {
+  flex: none;
+  aspect-ratio: 9 / 19.5;
+  border-radius: 46px;
+  padding: 9px;
+  background: #0b0b0e;
+  box-shadow:
+    0 0 0 1.5px #2a2a30,
+    0 40px 90px -24px rgba(0, 0, 0, 0.7);
+}
+.phone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 37px;
+  overflow: hidden;
+  background: #000;
+}
+.reel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #000;
+}
+.reel img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  animation: xf 14.4s infinite both;
+}
+.reel-bar {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  top: 12px;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.28);
+  overflow: hidden;
+}
+.reel-bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #fff;
+  transform-origin: left;
+  animation: bar 14.4s linear infinite;
+}
+@keyframes xf {
+  0% {
+    opacity: 0;
+    transform: scale(1.02);
+  }
+  3% {
+    opacity: 1;
+  }
+  17% {
+    opacity: 1;
+  }
+  21% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+}
+@keyframes bar {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 760px) {
+  .r-wrap {
+    padding: 0 20px;
+  }
+  .r-links {
+    display: none;
+  }
+  .r-nav {
+    justify-content: space-between;
+    height: 64px;
+  }
+  .r-foot {
+    margin-top: 96px;
+  }
+  .r-fgrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .r-fgrid > div:first-child {
+    grid-column: 1 / -1;
+  }
+  .r-fbottom {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reel img:first-child {
+    opacity: 1;
+  }
+}

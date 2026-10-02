@@ -1,0 +1,33 @@
+---
+/**
+ * The main call to action. Before launch it only says "Coming soon" and isn't a link;
+ * once SITE.appStoreLive is on, it opens the App Store.
+ */
+import Icon from './Icon.astro';
+import { SITE } from '../site';
+
+interface Props {
+  size?: 'md' | 'lg';
+  /** Short label for the nav. */
+  short?: boolean;
+}
+const { size = 'lg', short = false } = Astro.props;
+const label = SITE.appStoreLive
+  ? short ? 'Get the app' : 'Download on the App Store'
+  : short ? 'Coming soon' : 'Coming soon to iPhone';
+const cls = ['r-btn', 'r-primary', size === 'lg' && 'lg'];
+---
+
+{
+  SITE.appStoreLive ? (
+    <a class:list={cls} href={SITE.appStoreUrl}>
+      {!short && <Icon name="phone" size={18} />}
+      {label}
+    </a>
+  ) : (
+    <span class:list={cls} aria-disabled="true">
+      {!short && <Icon name="phone" size={18} />}
+      {label}
+    </span>
+  )
+}

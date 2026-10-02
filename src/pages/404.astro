@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Mark from '../components/Mark.astro';
+---
+
+<BaseLayout title="Page not found · Reelive" description="This page doesn’t exist.">
+  <section class="nf r-wrap">
+    <Mark size={64} />
+    <p class="r-label pink">404</p>
+    <h1>This page didn’t make the cut.</h1>
+    <p>The link may be old, or the page has moved.</p>
+    <a class="r-btn lg r-primary" href="/">Back to Reelive</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    padding-top: 120px;
+  }
+  h1 {
+    font-size: 48px;
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.04em;
+    margin: 0;
+  }
+  p:not(.r-label) {
+    color: var(--muted);
+    font-size: 18px;
+    margin: 0 0 12px;
+  }
+</style>

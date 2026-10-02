@@ -1,0 +1,270 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AppButton from '../components/AppButton.astro';
+import Icon from '../components/Icon.astro';
+import Mark from '../components/Mark.astro';
+import { SITE } from '../site';
+import { still } from '../lib/stills';
+import { waveHeights } from '../lib/wave';
+import '../styles/landing.css';
+
+// The showcase: 25 photos go in, the nine the mark lights up are "picked",
+// and six of them play in the phone, 2.4 s each — the same loop the timeline's playhead runs.
+const LIT_ORDER = ['1,0', '1,1', '1,2', '1,3', '1,4', '2,1', '2,2', '2,3', '3,2'];
+const LIT_IMG = [0, 3, 6, 9, 2, 10, 5, 8, 11];
+const REEL = [0, 6, 2, 5, 9, 11];
+const SLOT = 2.4;
+
+let dimmed = 0;
+const tiles = Array.from({ length: 25 }, (_, i) => {
+  const col = i % 5;
+  const key = `${col},${Math.floor(i / 5)}`;
+  const pick = LIT_ORDER.indexOf(key);
+  const on = pick >= 0;
+  return {
+    on,
+    src: on ? still(LIT_IMG[pick]) : still(dimmed++ * 5 + 1),
+    delay: `${on ? (col * 0.22).toFixed(2) : (col * 0.05).toFixed(2)}s`,
+  };
+});
+const cuts = [1, 2, 3, 4, 5].map((k) => `${((k / 6) * 100).toFixed(3)}%`);
+const wave = waveHeights(72, [12, 24, 36, 48, 60]);
+const strip = Array.from({ length: 24 }, (_, i) => still(i * 7));
+
+const yours = [
+  ['Choose the kind of reel', 'A trip, a birthday, a recap, a trend. Every template is already timed to its song.'],
+  ['Add all your photos and videos', 'Don’t choose. Throw in the whole lot, photos and clips together.'],
+];
+// Only what the AI step really does: picks per scene, one shot per near-duplicate group,
+// the best window in each video, cut to the template's beat.
+const ours = [
+  'Picks the best photos and clips',
+  'Skips the near-duplicates',
+  'Finds the best seconds in every video',
+  'Puts each moment in the right spot',
+  'Cuts everything to the beat',
+  'Hands you a finished reel, ready to post',
+];
+const pro = ['Make as many reels as you like', 'Try another template whenever you want', 'Your reels are made first'];
+const tiers = [
+  { name: 'Free', amount: '$0', note: 'Try it on your own photos.', items: [`Your first ${SITE.freeReels} reels`, 'Every template', 'No watermark'] },
+  { name: 'Pro Yearly', badge: 'Best value', amount: SITE.prices.yearly, per: '/ year', note: `Just ${SITE.prices.yearlyPerWeek} a week. Cancel anytime.`, items: pro, pro: true },
+  { name: 'Week Pass', amount: SITE.prices.weekPass, per: '/ week', note: 'Paid once. Ends after 7 days and never renews.', items: pro },
+];
+const faq = [
+  ['Do I have to choose my best photos?', 'No, that’s the point. Add all of them. Reelive looks at every photo and clip, skips the near-duplicates and keeps the best moments for your reel.'],
+  ['Is Reelive free?', `Your first ${SITE.freeReels} reels are free, with every template and no watermark. After that, Pro Yearly or a Week Pass lets you make as many reels as you like.`],
+  ['Do I need an account?', 'You can look around without one. To make a reel, sign in with Apple or Google, so your reels are saved to your account.'],
+  ['What happens to my photos?', 'They’re used only to make your reels. They’re never posted anywhere or used for ads, and they’re deleted when you delete your account. The <a href="/privacy">Privacy Policy</a> has the details.'],
+  ['Can I post to TikTok and Instagram?', 'Yes. Reels come out vertical, with no watermark, ready for TikTok, Instagram Reels and YouTube Shorts.'],
+  ['How do I cancel?', 'Pro Yearly renews until you cancel it in your Apple ID settings, at least 24 hours before it ends. The Week Pass never renews, so there’s nothing to cancel.'],
+  ['How do I delete my account?', `In the app, go to Settings → Delete account. Or email <a href="mailto:${SITE.supportEmail}">${SITE.supportEmail}</a> and we’ll do it for you.`],
+];
+---
+
+<BaseLayout title="Reelive: add all your photos, get a reel">
+  <section class="r-hero">
+    <div class="r-dots" aria-hidden="true"></div>
+    <div class="r-wrap">
+      <span class="r-badge"><Icon name="phone" size={15} />{SITE.appStoreLive ? 'Now on iPhone' : 'Coming soon to iPhone'}</span>
+      <h1 class="r-h1"><span>Add all your photos.</span> <span>We’ll make the reel.</span></h1>
+      <p class="r-sub">No sorting, no picking, no editing. Choose the kind of reel you want and Reelive does the rest.</p>
+      <div class="r-ctas">
+        <AppButton />
+        <a class="r-btn lg r-outline" href="#how">How it works <Icon name="arrowDown" size={17} /></a>
+      </div>
+      <p class="r-free">Your first {SITE.freeReels} reels are free.</p>
+
+      <figure class="r-show">
+        <figcaption class="sr-only">
+          Twenty-five photos go in. Reelive picks the nine best and plays them as a reel, with every cut on the beat of the music.
+        </figcaption>
+        <div class="r-stage" aria-hidden="true">
+          <div class="r-fig">
+            <p class="r-label">What you add</p>
+            <div class="r-grid">
+              {
+                tiles.map((t) => (
+                  <div class:list={['t', { on: t.on }]} style={`animation-delay:${t.delay}`}>
+                    <img src={t.src} alt="" width="360" height="640" decoding="async" />
+                    {t.on && (
+                      <span class="ck">
+                        <Icon name="check" size={12} bold />
+                      </span>
+                    )}
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+          <div class="r-flow">
+            <span>Reelive picks</span>
+            <svg class="r-arrow ic" viewBox="0 0 96 20"><path d="M2 10h88"></path><path d="M82 3l8 7-8 7"></path></svg>
+            <span>and cuts</span>
+          </div>
+          <div class="r-fig">
+            <p class="r-label"><b>What you get</b></p>
+            <div class="phone" style="width:250px">
+              <div class="phone-screen">
+                <div class="reel">
+                  {REEL.map((n, i) => <img src={still(n)} alt="" width="360" height="640" style={`animation-delay:${(i * SLOT).toFixed(1)}s`} />)}
+                  <span class="reel-bar"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="r-tl" aria-hidden="true">
+          <div class="r-tlhead">
+            <p class="r-label pink">Cut to the beat</p>
+            <span>Every template is timed to its song. Each cut lands on the music.</span>
+          </div>
+          <div class="r-track">
+            <div class="r-clips">{REEL.map((n) => <img src={still(n)} alt="" width="360" height="640" decoding="async" />)}</div>
+            <div class="r-wave">{wave.map((h) => <span class="wb" style={`height:${h}%`}></span>)}</div>
+            {cuts.map((left) => <span class="r-cut" style={`left:${left}`}></span>)}
+            <span class="r-head"></span>
+          </div>
+          <div class="r-times"><span>0:00</span><span>0:05</span><span>0:10</span><span>0:14</span></div>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="r-section r-parts" id="how" aria-labelledby="how-title">
+    <div class="r-wrap">
+      <h2 class="r-h2" id="how-title">You do two things.<br />Reelive does the rest.</h2>
+      <div class="r-split">
+        <div class="r-side">
+          <h3 class="r-label">Your part</h3>
+          <ol class="r-mine">
+            {
+              yours.map(([h, p], i) => (
+                <li class="r-row">
+                  <span class="r-big" aria-hidden="true">0{i + 1}</span>
+                  <h4>{h}</h4>
+                  <p>{p}</p>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+        <div class="r-side ours">
+          <h3 class="r-label pink">Reelive’s part</h3>
+          <ul class="r-ours">
+            {
+              ours.map((t) => (
+                <li>
+                  <span class="r-ok">
+                    <Icon name="check" size={15} bold />
+                  </span>
+                  {t}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="r-section" id="templates" aria-labelledby="templates-title">
+    <div class="r-wrap">
+      <p class="r-label pink">Templates</p>
+      <h2 class="r-h2" id="templates-title">The only choice you make: what kind of reel.</h2>
+      <p class="r-lead">Travel, recaps, birthdays and trends, each one already timed to its song.</p>
+      <div class="r-bento">
+        <div class="r-card wide">
+          <span class="r-ic"><Icon name="film" size={19} /></span>
+          <h3>A template for every moment</h3>
+          <p>{SITE.templates} to choose from. Pick one, add your photos, done.</p>
+          <ul class="r-cats" aria-label="Categories">
+            <li>Travel</li><li>Trending</li><li>Lifestyle</li><li>Recap</li><li>Celebrations</li><li>Adventures</li>
+          </ul>
+          <div class="r-strip" aria-hidden="true">
+            {strip.map((src) => <img src={src} alt="" width="360" height="640" loading="lazy" decoding="async" />)}
+          </div>
+        </div>
+        <div class="r-card">
+          <span class="r-ic"><Icon name="type" size={19} /></span>
+          <h3>Your words on screen</h3>
+          <p>Change the text in any template to say what you want.</p>
+        </div>
+        <div class="r-card">
+          <span class="r-ic"><Icon name="badge" size={19} /></span>
+          <h3>Ready to post</h3>
+          <p>No watermark. Made for TikTok, Reels and Shorts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="r-section" id="pricing" aria-labelledby="pricing-title">
+    <div class="r-wrap">
+      <p class="r-label pink">Pricing</p>
+      <h2 class="r-h2" id="pricing-title">Two reels on us. Then go Pro.</h2>
+      <div class="r-prices">
+        {
+          tiers.map((t) => (
+            <div class:list={['r-price', { pro: t.pro }]}>
+              <h3 class="r-tier">
+                <span>{t.name}</span>
+                {t.badge && <span class="r-pill">{t.badge}</span>}
+              </h3>
+              <p class="r-amt">
+                {t.amount}
+                {t.per && <small> {t.per}</small>}
+              </p>
+              <p class="r-note">{t.note}</p>
+              <ul class="r-list">
+                {t.items.map((item) => (
+                  <li>
+                    <Icon name="check" size={16} />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+      <p class="r-fine">
+        Prices in US dollars. The App Store shows the price in your currency. Yearly renews until you cancel in your Apple ID
+        settings. See the <a href="/terms" style="color:inherit">Terms</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="r-section" id="faq" aria-labelledby="faq-title">
+    <div class="r-wrap r-faq">
+      <div>
+        <p class="r-label pink">FAQ</p>
+        <h2 class="r-h2" id="faq-title">Questions, answered.</h2>
+        <p class="r-ask">Something else? Write to <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>.</p>
+      </div>
+      <div class="r-qs">
+        {
+          faq.map(([q, a], i) => (
+            <details class="r-q" open={i === 0}>
+              <summary>
+                {q}
+                <Icon name="plus" size={20} />
+              </summary>
+              <p set:html={a} />
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <div class="r-wrap">
+    <section class="r-end" aria-labelledby="end-title">
+      <Mark size={56} />
+      <h2 class="r-h2" id="end-title">Stop picking photos.<br />Start posting reels.</h2>
+      <p class="r-sub">Choose the kind of reel. Add everything. Reelive does the rest.</p>
+      <div class="r-ctas"><AppButton /></div>
+      <p class="r-free">Your first {SITE.freeReels} reels are free.</p>
+    </section>
+  </div>
+</BaseLayout>

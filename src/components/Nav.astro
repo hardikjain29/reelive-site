@@ -1,0 +1,17 @@
+---
+import Logo from './Logo.astro';
+import AppButton from './AppButton.astro';
+---
+
+<div class="r-navbar">
+  <div class="r-wrap r-nav">
+    <a class="r-home" href="/" aria-label="Reelive home"><Logo scale={0.9} /></a>
+    <nav class="r-links" aria-label="Main">
+      <a href="/#how">How it works</a>
+      <a href="/#templates">Templates</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/#faq">FAQ</a>
+    </nav>
+    <AppButton size="md" short />
+  </div>
+</div>

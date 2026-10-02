@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://reelive.app/sitemap-index.xml

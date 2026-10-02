@@ -14,3 +14,29 @@ export const SITE = {
   description:
     'Add all your photos and videos, choose the kind of reel you want, and Reelive picks the best moments and cuts them to the music.',
 } as const;
+
+/**
+ * Who runs Reelive, for the Impressum, the Privacy Policy and the Terms.
+ * Bracketed values are placeholders: fill them in before going live.
+ */
+export const OPERATOR = {
+  name: 'Hardik Jain',
+  street: '[Street and number]',
+  city: '[Postcode and city]',
+  country: 'Germany',
+  email: 'support@reelive.app',
+  /** Optional, but a second quick way to reach us besides email is recommended for the Impressum. */
+  phone: null as string | null,
+  /** USt-IdNr or Wirtschafts-ID, only if one has been issued. */
+  vatId: null as string | null,
+  /** The data protection authority of the Land the operator lives in. */
+  authority: '[Data protection authority of your Land]',
+  /** Court for disputes with merchants (not consumers): the operator's city. */
+  courtCity: '[City]',
+} as const;
+
+/** Fair-use limits for Pro (the backend's PRO_DAILY_REEL_CAP and PRO_MAX_ACTIVE_REELS). */
+export const PRO_LIMITS = { perDay: 30, atOnce: 3 } as const;
+
+/** Shown on every legal page. Update when a text changes. */
+export const LEGAL_UPDATED = '2 October 2026';

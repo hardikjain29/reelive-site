@@ -1,0 +1,191 @@
+---
+layout: ../layouts/LegalLayout.astro
+title: Privacy Policy
+description: What the Reelive app and reelive.app do with your data, why, for how long, and your rights.
+note: Covers the Reelive app and reelive.app
+---
+import { OPERATOR } from '../site';
+
+This policy explains what personal data the Reelive app and this website process, why we process it, who helps us, how long we keep it and what rights you have. We've tried to keep it plain. If anything is unclear, write to <a href={`mailto:${OPERATOR.email}`}>{OPERATOR.email}</a>.
+
+## 1. Who we are
+
+Reelive is made and run by:
+
+<address><strong>{OPERATOR.name}</strong><br />{OPERATOR.street}<br />{OPERATOR.city}<br />{OPERATOR.country}<br /><a href={`mailto:${OPERATOR.email}`}>{OPERATOR.email}</a></address>
+
+We ("we", "us") are the controller responsible for your personal data under the EU General Data Protection Regulation (GDPR). We are not required to appoint a data protection officer.
+
+## 2. The short version
+
+<div class="r-short">
+
+- Your photos and videos are used only to make your reels.
+- No ads. We never sell your data or share it for advertising.
+- We record how the app is used to improve it. We don't track you across other companies' apps or websites.
+- You can delete your account in Settings at any time, and your reels and uploads go with it.
+
+</div>
+
+## 3. What we process and why
+
+### Your account
+
+When you sign in with Apple or Google, we receive an account ID from them, and your email address and name if you share them. With Apple you can hide your real email address. We use this to create your account, keep it secure and keep your reels with you.
+
+If you look around without signing in, the app creates a guest account with a random ID. Guest accounts that never make a reel are deleted after 30 days.
+
+**Legal basis:** our contract with you (Art. 6(1)(b) GDPR). **Kept:** until you delete your account.
+
+### Your photos, videos and reels
+
+The photos and videos you add are uploaded to our storage. To make your reel:
+
+- our AI analysis looks at them: what's in each photo and clip, which ones are near-duplicates, and which moments are best;
+- our rendering service puts the chosen moments into the template and produces the finished video.
+
+We store your uploads, the results of the analysis, the finished reel, the template you used and any text you type into it. We don't use your photos or videos to train AI models. OpenAI, which runs the analysis, doesn't train its models on data sent through its API, and keeps it for at most 30 days to detect abuse.
+
+**Legal basis:** our contract with you (Art. 6(1)(b) GDPR). **Kept:** until you delete the reel or your account. Uploads that never finish are deleted automatically after about a day.
+
+### Free reels and protection against abuse
+
+Each phone gets its free reels only once. To make that work, the app sends a random identifier stored on your phone. We keep only a scrambled (hashed) form of it and of your IP address, together with how many free reels were given. This record isn't deleted with your account, so free reels can't be claimed again by deleting an account and signing up again.
+
+We also count requests per IP address for a short time, to stop one network from creating endless accounts or overloading the service. These counters expire after the limit's time window, at most a day.
+
+**Legal basis:** our legitimate interest in preventing abuse of the free offer and keeping the service available (Art. 6(1)(f) GDPR). **Kept:** the free-reel record for as long as we offer free reels; request counters for at most a day.
+
+### Purchases
+
+Reelive Pro is sold through Apple's App Store. Apple handles the payment, and we never see your payment details. We use RevenueCat to check your subscription: RevenueCat receives your App Store purchase information and your Reelive account ID. We store whether you have Pro and until when, and a record of each purchase event (product, date and store transaction IDs).
+
+**Legal basis:** our contract with you (Art. 6(1)(b) GDPR) and our legal obligations to keep business records (Art. 6(1)(c) GDPR). **Kept:** your Pro status until you delete your account. Purchase records are kept without a link to your account for as long as tax and commercial law require, up to 10 years.
+
+### Usage data
+
+We record how the app is used: which screens you open and what you do there, for example which templates you look at, the reels you make, and what you type into the template search. Each event carries your account ID, the app version, your phone's platform and your language and region setting. It doesn't include your email address, advertising IDs, device IDs or your location. The app keeps these events on your phone for a short time until it can send them to us.
+
+We use this to understand what works, what doesn't and what to fix. We also send a copy to PostHog, our analytics provider, which hosts the data in the EU.
+
+**Legal basis:** our legitimate interest in improving Reelive (Art. 6(1)(f) GDPR). **Kept:** up to 13 months in our systems. PostHog keeps its copy for as long as its plan keeps events, currently 1 year. When you delete your account, both copies are deleted.
+
+**You can object at any time.** Email <a href={`mailto:${OPERATOR.email}`}>{OPERATOR.email}</a> and we'll stop recording your usage data.
+
+### Crash reports
+
+When the app or our servers hit an error, our error-tracking service, Sentry, receives a report: what went wrong, the app version, the device model and system version, and your account ID.
+
+**Legal basis:** our legitimate interest in keeping Reelive working (Art. 6(1)(f) GDPR). **Kept:** up to 90 days.
+
+### Notifications
+
+If you allow notifications, we store your phone's push token so we can tell you when your reel is ready. Notifications are delivered through Expo's push service and Apple Push Notification service.
+
+**Legal basis:** your permission (Art. 6(1)(a) GDPR), which you can withdraw at any time in your iPhone's Settings. **Kept:** until you turn notifications off or delete your account.
+
+### Feedback and ratings
+
+If you rate a reel or send feedback in the app, we store your rating, the reasons you pick, your message, and the app version, system version, device model and language. We get a notification about new messages and new comments on a rating, which includes the text, through Telegram. We may answer you by email.
+
+**Legal basis:** our legitimate interest in improving Reelive and answering you (Art. 6(1)(f) GDPR). **Kept:** until you delete your account.
+
+### Emails to support
+
+When you write to {OPERATOR.email}, we use your email address and what you send us to answer. Our email address forwards to our mailbox at Google (Gmail).
+
+**Legal basis:** our contract with you, or our legitimate interest in answering your request (Art. 6(1)(b) and (f) GDPR). **Kept:** as long as needed to help you and handle any follow-up.
+
+### App updates
+
+The app checks for and downloads updates from Expo's update service. Like any download, this request includes your IP address and basic information about the app and your phone.
+
+**Legal basis:** our legitimate interest in keeping the app secure and up to date (Art. 6(1)(f) GDPR).
+
+### Server logs
+
+Our servers log requests, including IP addresses and times, for security and troubleshooting.
+
+**Legal basis:** our legitimate interest in running a secure service (Art. 6(1)(f) GDPR). **Kept:** up to 30 days.
+
+### This website
+
+reelive.app is hosted on GitHub Pages. When you visit, GitHub processes your IP address and details of the request (the page, the time, your browser) to deliver the page and protect the service. The site uses **no cookies, no analytics and no tracking**, and its fonts are loaded from the site itself.
+
+**Legal basis:** our legitimate interest in providing a secure website (Art. 6(1)(f) GDPR).
+
+## 4. Who helps us run Reelive
+
+These companies process data on our behalf, only as needed for the purposes above.
+
+| Company | What for | Where |
+|---|---|---|
+| Amazon Web Services | Storing uploads and reels, delivering them to you | Germany (Frankfurt); delivery from servers near you |
+| Railway | Our servers and database | [Region] |
+| OpenAI | Analysing photos and videos to pick the moments | USA |
+| Shotstack | Rendering the finished video | Australia |
+| RevenueCat | Checking your subscription | USA |
+| PostHog | Usage analytics | EU (Germany) |
+| Sentry | Crash reports | [Region] |
+| Expo | Push notifications and app updates | USA |
+| Telegram | Notifying us about new feedback | [Region] |
+| Spaceship and Google | Forwarding and receiving support email | USA |
+| GitHub | Hosting this website | USA |
+
+Apple and Google also process your data when you sign in with them, when you buy through the App Store, and when they deliver notifications. For that they are responsible under their own privacy policies.
+
+When data is processed outside the EU or EEA, we rely on an adequacy decision of the European Commission (for the USA, the EU–US Data Privacy Framework, for companies certified under it) or on the EU Standard Contractual Clauses.
+
+We don't sell your personal data and don't share it with anyone for advertising.
+
+## 5. How long we keep it
+
+Most of your data is kept only as long as your account exists. When you delete your account in Settings, we delete your uploads, reels, account details, ratings, feedback and usage data, and ask PostHog and RevenueCat to delete theirs. What stays:
+
+- the hashed free-reel record, without your account (see section 3);
+- purchase records, without your account, for as long as the law requires;
+- server logs and crash reports, until they expire.
+
+## 6. Your rights
+
+Under the GDPR you have the right to:
+
+- **access** the data we hold about you (Art. 15);
+- have it **corrected** (Art. 16) or **deleted** (Art. 17);
+- **restrict** how we use it (Art. 18);
+- **receive** it in a portable format (Art. 20);
+- **withdraw** a permission you gave, with effect for the future (Art. 7(3));
+- **complain** to a data protection authority (Art. 77), for example where you live, or the one responsible for us: {OPERATOR.authority}.
+
+<div class="r-callout">
+
+**Your right to object (Art. 21 GDPR).** Where we rely on our legitimate interests (usage data, crash reports, abuse protection, feedback), you can object at any time for reasons that arise from your particular situation. For usage data, you don't need to give a reason: write to <a href={`mailto:${OPERATOR.email}`}>{OPERATOR.email}</a> and we'll stop.
+
+</div>
+
+To use any of these rights, email <a href={`mailto:${OPERATOR.email}`}>{OPERATOR.email}</a>, ideally from the email address of your account, so we can find it.
+
+## 7. Automated decisions
+
+Reelive's AI decides which of your photos and clips go into a reel and where. These choices don't have legal or similarly significant effects on you, so they aren't automated decisions in the sense of Art. 22 GDPR. If you don't like a result, you can try another template.
+
+## 8. Children
+
+Reelive isn't meant for children under 13. If you believe a child under 13 has given us personal data, contact us and we'll delete it.
+
+## 9. Users in the United States
+
+If you live in California or another US state with a privacy law, this section adds to the ones above.
+
+- **What we collect:** identifiers (account ID, email address, name), the content you add (photos, videos, text), purchase information, usage data and diagnostics, as described in section 3.
+- **Sources:** you, your use of the app, and Apple, Google and RevenueCat.
+- **No selling or sharing:** we don't sell your personal information or share it for cross-context behavioral advertising, and we haven't in the past 12 months.
+- **Your rights:** you can ask to know, correct or delete your personal information by emailing <a href={`mailto:${OPERATOR.email}`}>{OPERATOR.email}</a>. We won't treat you differently for using these rights.
+
+## 10. Changes to this policy
+
+If we change this policy, we'll update the date at the top. If a change matters to you, we'll also tell you in the app before it takes effect.
+
+## 11. Contact
+
+Questions about your data or this policy? Write to <a href={`mailto:${OPERATOR.email}`}>{OPERATOR.email}</a>, or by post to {OPERATOR.name}, {OPERATOR.street}, {OPERATOR.city}, {OPERATOR.country}.

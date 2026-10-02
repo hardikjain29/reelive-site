@@ -1,0 +1,28 @@
+---
+layout: ../layouts/LegalLayout.astro
+title: Impressum
+description: Legal notice (Impressum) for Reelive under § 5 DDG.
+note: Legal notice
+---
+import { OPERATOR } from '../site';
+
+## Angaben gemäß § 5 DDG
+
+<address><strong>{OPERATOR.name}</strong><br />{OPERATOR.street}<br />{OPERATOR.city}<br />Deutschland</address>
+
+## Kontakt / Contact
+
+E-Mail: <a href={`mailto:${OPERATOR.email}`}>{OPERATOR.email}</a>
+{OPERATOR.phone && <><br />Telefon: {OPERATOR.phone}</>}
+
+{OPERATOR.vatId && <><h2>Umsatzsteuer-ID / VAT ID</h2><p>{OPERATOR.vatId}</p></>}
+
+## Verbraucherstreitbeilegung / Consumer disputes
+
+Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
+
+We're not willing or obliged to take part in dispute resolution proceedings before a consumer arbitration board.
+
+## Legal notice (English)
+
+Reelive is run by {OPERATOR.name}, {OPERATOR.street}, {OPERATOR.city}, Germany. Email: <a href={`mailto:${OPERATOR.email}`}>{OPERATOR.email}</a>.

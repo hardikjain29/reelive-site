@@ -1,0 +1,67 @@
+---
+/**
+ * The legal and help pages: a header, a table of contents that stays in view on
+ * desktop (folded on phones), and the text. Used as the `layout` of the .mdx pages.
+ */
+import BaseLayout from './BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { LEGAL_UPDATED } from '../site';
+import '../styles/legal.css';
+
+interface Props {
+  frontmatter: { title: string; description: string; label?: string; note?: string };
+  headings?: { depth: number; slug: string; text: string }[];
+}
+const { frontmatter, headings = [] } = Astro.props;
+const toc = headings.filter((h) => h.depth === 2);
+const withToc = toc.length >= 3;
+---
+
+<BaseLayout title={`${frontmatter.title} · Reelive`} description={frontmatter.description}>
+  <div class="r-wrap">
+    <header class="r-lhead">
+      <p class="r-label pink">{frontmatter.label ?? 'Legal'}</p>
+      <h1 class="r-lh1">{frontmatter.title}</h1>
+      <div class="r-meta">
+        <span class="r-chip pink">Last updated {LEGAL_UPDATED}</span>
+        {frontmatter.note && <span class="r-chip">{frontmatter.note}</span>}
+      </div>
+    </header>
+    <div class:list={['r-legal', { 'no-toc': !withToc }]}>
+      {
+        withToc && (
+          <nav class="r-toc" aria-label="On this page">
+            <p class="r-label">On this page</p>
+            <ol>
+              {toc.map((h) => (
+                <li>
+                  <a href={`#${h.slug}`}>{h.text}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )
+      }
+      <article class="r-prose">
+        {
+          withToc && (
+            <details class="r-tocm">
+              <summary>
+                On this page
+                <Icon name="plus" size={18} />
+              </summary>
+              <ol>
+                {toc.map((h) => (
+                  <li>
+                    <a href={`#${h.slug}`}>{h.text}</a>
+                  </li>
+                ))}
+              </ol>
+            </details>
+          )
+        }
+        <slot />
+      </article>
+    </div>
+  </div>
+</BaseLayout>

@@ -263,6 +263,55 @@
     opacity: 0;
   }
 }
+/* Video tiles: the duration in the corner, like the camera roll; on a pick, the seconds used. */
+.t.video::before {
+  content: '';
+  position: absolute;
+  inset: 45% 0 0 0;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6));
+  pointer-events: none;
+}
+.vid {
+  position: absolute;
+  right: 6px;
+  bottom: 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.85);
+  font-variant-numeric: tabular-nums;
+}
+.vid svg,
+.r-cliptag svg {
+  width: 8px;
+  height: 8px;
+  fill: currentColor;
+}
+.trim {
+  position: absolute;
+  left: 7px;
+  right: 7px;
+  bottom: 20px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.55);
+  opacity: 0;
+  animation: show 6s infinite both;
+  animation-delay: inherit;
+}
+.trim i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  min-width: 6px;
+  border-radius: 2px;
+  background: var(--pink);
+  box-shadow: 0 0 6px rgba(255, 79, 151, 0.9);
+}
 .r-flow {
   display: flex;
   flex-direction: column;
@@ -303,6 +352,26 @@
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 4px;
   height: 88px;
+}
+.r-clips > div {
+  position: relative;
+  min-width: 0;
+}
+.r-cliptag {
+  position: absolute;
+  left: 6px;
+  bottom: 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px;
+  border-radius: 6px;
+  background: rgba(9, 9, 11, 0.75);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 .r-clips img {
   width: 100%;
@@ -776,6 +845,25 @@
     height: 64px;
     border-radius: 6px;
   }
+  .r-cliptag {
+    left: 4px;
+    bottom: 4px;
+    padding: 3px 4px;
+  }
+  .r-cliptag span {
+    display: none;
+  }
+  .vid {
+    right: 4px;
+    bottom: 4px;
+    font-size: 9px;
+  }
+  .trim {
+    left: 5px;
+    right: 5px;
+    bottom: 16px;
+    height: 3px;
+  }
   .r-wave {
     height: 34px;
     gap: 2px;
@@ -844,7 +932,8 @@
     filter: grayscale(1);
   }
   .t.on::after,
-  .ck {
+  .ck,
+  .trim {
     opacity: 1;
   }
   .r-head {

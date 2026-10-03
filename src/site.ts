@@ -15,7 +15,7 @@ export const SITE = {
    * PostHog (EU) project API key for the website's cookieless analytics (components/Analytics.astro).
    * It's a public key, meant for web pages. Empty = no analytics. PUBLIC_POSTHOG_KEY overrides it for local tests.
    */
-  posthogKey: (import.meta.env.PUBLIC_POSTHOG_KEY as string | undefined) || '',
+  posthogKey: (import.meta.env.PUBLIC_POSTHOG_KEY as string | undefined) || 'phc_D8GTe5LSkX4dY5krpuiNqHtbnC9CFThFMhRbLjsD4M7o',
   description:
     'Add all your photos and videos, choose the kind of reel you want, and Reelive picks the best moments and cuts them to the music.',
 } as const;

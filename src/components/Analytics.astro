@@ -1,9 +1,16 @@
 ---
 /**
- * Website analytics: PostHog (EU) in cookieless mode. Nothing is written to the
- * visitor's device (no cookies, no local/session storage), so no consent banner is
- * needed; the privacy policy describes it under "This website". It only runs on
- * reelive.app, after the page is idle, and only while SITE.posthogKey is set.
+ * Website analytics: PostHog (EU) with memory-only persistence. Nothing is written
+ * to the visitor's device (no cookies, no local/session storage), so no consent
+ * banner is needed; the privacy policy describes it under "This website". Each page
+ * visit gets a random ID that lives only while the page is open.
+ *
+ * Not PostHog's cookieless "server hash" mode on purpose: that mode strips the IP
+ * before GeoIP runs, so events would have no country, region or city. Here PostHog
+ * derives the location from the IP and the project's "Discard client IP data"
+ * setting drops the IP itself. The cost: a returning visitor counts again.
+ *
+ * It only runs on reelive.app, after the page is idle, and only while SITE.posthogKey is set.
  *
  * Events: $pageview, $pageleave (time and scroll), cta_clicked {place},
  * faq_opened {question}, support_email_clicked. All carry origin: web.
@@ -24,7 +31,6 @@
     posthog.init(SITE.posthogKey, {
       api_host: 'https://eu.i.posthog.com',
       ui_host: 'https://eu.posthog.com',
-      cookieless_mode: 'always',
       persistence: 'memory',
       person_profiles: 'never',
       respect_dnt: true,

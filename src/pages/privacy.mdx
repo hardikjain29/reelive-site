@@ -112,9 +112,11 @@ Our servers log requests, including IP addresses and times, for security and tro
 
 ### This website
 
-reelive.app is hosted on GitHub Pages. When you visit, GitHub processes your IP address and details of the request (the page, the time, your browser) to deliver the page and protect the service. The site uses **no cookies, no analytics and no tracking**, and its fonts are loaded from the site itself.
+reelive.app is hosted on GitHub Pages. When you visit, GitHub processes your IP address and details of the request (the page, the time, your browser) to deliver the page and protect the service. The site's fonts are loaded from the site itself.
 
-**Legal basis:** our legitimate interest in providing a secure website (Art. 6(1)(f) GDPR).
+To see how the site is used, we use PostHog in cookieless mode: which pages are visited, the site you came from, how far you scroll, and which buttons and questions you click. **No cookies are set and nothing is stored on your device.** To count visitors without cookies, PostHog combines your IP address and browser details with a secret value that changes every day into a code (a hash), so your visits can't be linked from one day to the next. We've set PostHog not to store IP addresses; it may use yours to estimate the country you're visiting from. If your browser sends a "Do Not Track" signal, nothing is recorded.
+
+**Legal basis:** our legitimate interest in providing a secure website and understanding how it's used, so we can improve it (Art. 6(1)(f) GDPR). **Kept:** website usage data for as long as PostHog's plan keeps events, currently 1 year. You can object at any time by emailing us.
 
 ## 4. Who helps us run Reelive
 
@@ -127,7 +129,7 @@ These companies process data on our behalf, only as needed for the purposes abov
 | OpenAI | Analysing photos and videos to pick the moments | USA |
 | Shotstack | Rendering the finished video | Australia |
 | RevenueCat | Checking your subscription | USA |
-| PostHog | Usage analytics | EU (Germany) |
+| PostHog | Usage analytics for the app and this website | EU (Germany) |
 | Sentry | Crash reports | USA |
 | Expo | Push notifications and app updates | USA |
 | Spaceship and Google | Forwarding and receiving support email | USA |

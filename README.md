@@ -1,7 +1,7 @@
 # reelive.app
 
 The website for Reelive: the landing page, Privacy Policy, Terms of Use, Impressum, help and account deletion.
-Static [Astro](https://astro.build), no cookies, no analytics, no client-side scripts.
+Static [Astro](https://astro.build), no cookies. The only script is cookieless PostHog analytics (`src/components/Analytics.astro`), on reelive.app only, off while `SITE.posthogKey` is empty.
 
 ```sh
 npm install

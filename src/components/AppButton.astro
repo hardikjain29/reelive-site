@@ -10,8 +10,10 @@ interface Props {
   size?: 'md' | 'lg';
   /** Short label for the nav. */
   short?: boolean;
+  /** Where on the page it sits, for the website analytics (cta_clicked {place}). */
+  place: string;
 }
-const { size = 'lg', short = false } = Astro.props;
+const { size = 'lg', short = false, place } = Astro.props;
 const label = SITE.appStoreLive
   ? short ? 'Get the app' : 'Download on the App Store'
   : short ? 'Coming soon' : 'Coming soon to iPhone';
@@ -20,12 +22,12 @@ const cls = ['r-btn', 'r-primary', size === 'lg' && 'lg'];
 
 {
   SITE.appStoreLive ? (
-    <a class:list={cls} href={SITE.appStoreUrl}>
+    <a class:list={cls} href={SITE.appStoreUrl} data-track="cta_clicked" data-place={place}>
       {!short && <Icon name="phone" size={18} />}
       {label}
     </a>
   ) : (
-    <span class:list={cls} aria-disabled="true">
+    <span class:list={cls} aria-disabled="true" data-track="cta_clicked" data-place={place}>
       {!short && <Icon name="phone" size={18} />}
       {label}
     </span>

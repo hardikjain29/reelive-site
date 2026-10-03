@@ -11,6 +11,11 @@ export const SITE = {
   /** Visible templates, rounded down (re-count before launch). */
   templates: '1,300+',
   prices: { yearly: '$49.99', yearlyPerWeek: '$0.96', weekPass: '$5.99' },
+  /**
+   * PostHog (EU) project API key for the website's cookieless analytics (components/Analytics.astro).
+   * It's a public key, meant for web pages. Empty = no analytics. PUBLIC_POSTHOG_KEY overrides it for local tests.
+   */
+  posthogKey: (import.meta.env.PUBLIC_POSTHOG_KEY as string | undefined) || '',
   description:
     'Add all your photos and videos, choose the kind of reel you want, and Reelive picks the best moments and cuts them to the music.',
 } as const;
@@ -38,4 +43,4 @@ export const OPERATOR = {
 export const PRO_LIMITS = { perDay: 30, atOnce: 3 } as const;
 
 /** Shown on every legal page. Update when a text changes. */
-export const LEGAL_UPDATED = '2 October 2026';
+export const LEGAL_UPDATED = '3 October 2026';

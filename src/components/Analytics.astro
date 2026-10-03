@@ -1,0 +1,67 @@
+---
+/**
+ * Website analytics: PostHog (EU) in cookieless mode. Nothing is written to the
+ * visitor's device (no cookies, no local/session storage), so no consent banner is
+ * needed; the privacy policy describes it under "This website". It only runs on
+ * reelive.app, after the page is idle, and only while SITE.posthogKey is set.
+ *
+ * Events: $pageview, $pageleave (time and scroll), cta_clicked {place},
+ * faq_opened {question}, support_email_clicked. All carry origin: web.
+ *
+ * On localhost, `?analytics=test` (with PUBLIC_POSTHOG_KEY set at build time)
+ * starts PostHog without sending anything, to check what it stores.
+ */
+---
+
+<script>
+  import { SITE } from '../site';
+
+  const host = location.hostname;
+  const test = (host === 'localhost' || host === '127.0.0.1') && new URLSearchParams(location.search).get('analytics') === 'test';
+
+  async function start() {
+    const { default: posthog } = await import('posthog-js/dist/module.slim');
+    posthog.init(SITE.posthogKey, {
+      api_host: 'https://eu.i.posthog.com',
+      ui_host: 'https://eu.posthog.com',
+      cookieless_mode: 'always',
+      persistence: 'memory',
+      person_profiles: 'never',
+      respect_dnt: true,
+      capture_pageview: true,
+      capture_pageleave: true,
+      autocapture: false,
+      rageclick: false,
+      capture_dead_clicks: false,
+      capture_exceptions: false,
+      capture_heatmaps: false,
+      capture_performance: false,
+      disable_session_recording: true,
+      disable_surveys: true,
+      disable_product_tours: true,
+      disable_web_experiments: true,
+      disable_external_dependency_loading: true,
+      advanced_disable_flags: true,
+      before_send: test ? () => null : undefined,
+    });
+    posthog.register({ origin: 'web' });
+
+    document.addEventListener('click', (event) => {
+      const el = (event.target as Element | null)?.closest<HTMLElement>('[data-track], a[href^="mailto:"]');
+      if (!el) return;
+      if (el.dataset.track) posthog.capture(el.dataset.track, { place: el.dataset.place });
+      else posthog.capture('support_email_clicked');
+    });
+    document.querySelectorAll<HTMLDetailsElement>('details.r-q').forEach((details) =>
+      details.addEventListener('toggle', () => {
+        if (details.open) posthog.capture('faq_opened', { question: details.querySelector('summary')?.textContent?.trim() });
+      })
+    );
+    if (test) (window as unknown as { __posthog: unknown }).__posthog = posthog;
+  }
+
+  if (SITE.posthogKey && (host === 'reelive.app' || test)) {
+    if ('requestIdleCallback' in window) requestIdleCallback(() => void start());
+    else setTimeout(() => void start(), 200);
+  }
+</script>

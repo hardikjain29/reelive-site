@@ -43,12 +43,13 @@ If you look around without signing in, the app creates a guest account with a ra
 
 The photos and videos you add are uploaded to our storage. To make your reel:
 
+- an automatic content check looks at each photo and at frames of each video for sexual content first. A file it flags isn't used in your reel, and we may look at it to decide whether it breaks our Terms;
 - our AI analysis looks at them: what's in each photo and clip, which ones are near-duplicates, and which moments are best;
 - our rendering service puts the chosen moments into the template and produces the finished video.
 
 We store your uploads, the results of the analysis, the finished reel, the template you used and any text you type into it. We don't use your photos or videos to train AI models. OpenAI, which runs the analysis, doesn't train its models on data sent through its API, and keeps it for at most 30 days to detect abuse.
 
-**Legal basis:** our contract with you (Art. 6(1)(b) GDPR). **Kept:** until you delete the reel or your account. Uploads that never finish are deleted automatically after about a day.
+**Legal basis:** our contract with you (Art. 6(1)(b) GDPR); for the content check, our legitimate interest in keeping illegal and harmful content off Reelive (Art. 6(1)(f) GDPR). **Kept:** until you delete the reel or your account. Uploads that never finish are deleted automatically after about a day. A record that a file was flagged (when, and the check's score, not the file) is kept until you delete your account, so we can see repeated uploads of such content.
 
 ### Free reels and protection against abuse
 
@@ -126,7 +127,7 @@ These companies process data on our behalf, only as needed for the purposes abov
 |---|---|---|
 | Amazon Web Services | Storing uploads and reels, delivering them to you | Germany (Frankfurt); delivery from servers near you |
 | Railway | Our servers and database | EU (Netherlands) |
-| OpenAI | Analysing photos and videos to pick the moments | USA |
+| OpenAI | Analysing photos and videos to pick the moments, and the content check | USA |
 | Shotstack | Rendering the finished video | Australia |
 | RevenueCat | Checking your subscription | USA |
 | PostHog | Usage analytics for the app and this website | EU (Germany) |
@@ -170,7 +171,7 @@ To use any of these rights, email <a href={`mailto:${OPERATOR.email}`}>{OPERATOR
 
 ## 7. Automated decisions
 
-Reelive's AI decides which of your photos and clips go into a reel and where. These choices don't have legal or similarly significant effects on you, so they aren't automated decisions in the sense of Art. 22 GDPR. If you don't like a result, you can try another template.
+Reelive's AI decides which of your photos and clips go into a reel and where, and the content check can leave a file out of a reel. These choices don't have legal or similarly significant effects on you, so they aren't automated decisions in the sense of Art. 22 GDPR. If you don't like a result, you can try another template. Blocking an account is never automatic: a person decides.
 
 ## 8. Children
 

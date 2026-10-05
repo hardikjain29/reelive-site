@@ -43,4 +43,4 @@ export const OPERATOR = {
 export const PRO_LIMITS = { perDay: 30, atOnce: 3 } as const;
 
 /** Shown on every legal page. Update when a text changes. */
-export const LEGAL_UPDATED = '3 October 2026';
+export const LEGAL_UPDATED = '6 October 2026';

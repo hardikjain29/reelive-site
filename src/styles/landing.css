@@ -88,13 +88,13 @@
   color: var(--pink);
   font-weight: 600;
 }
-/* Above the grid: "You add 25" and "Reelive picks 9". The picks label lights up
+/* Above the grid: "You add 40" and "Reelive picks 17". The picks label lights up
    with the tiles (same 6 s loop, from the first lit column), the other one steps back. */
 .r-gridhead {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 470px;
+  width: 100%;
 }
 .r-gridhead .r-label b {
   color: inherit;
@@ -167,15 +167,19 @@
 }
 .r-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 10px;
-  width: 470px;
-  flex: none;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+}
+/* The grid's figure takes what the arrow and the phone leave, up to 540px. */
+.r-stage > .r-fig:first-child {
+  flex: 0 1 540px;
+  min-width: 0;
 }
 .t {
   position: relative;
   aspect-ratio: 1 / 1;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   animation: dim 6s infinite both;
 }
@@ -191,18 +195,18 @@
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 12px;
-  box-shadow: inset 0 0 0 2.5px var(--pink);
+  border-radius: 10px;
+  box-shadow: inset 0 0 0 2px var(--pink);
   opacity: 0;
   animation: show 6s infinite both;
   animation-delay: inherit;
 }
 .ck {
   position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 20px;
-  height: 20px;
+  top: 4px;
+  right: 4px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   background: var(--pink);
   color: #fff;
@@ -273,12 +277,12 @@
 }
 .vid {
   position: absolute;
-  right: 6px;
-  bottom: 5px;
+  right: 4px;
+  bottom: 4px;
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-  font-size: 10px;
+  gap: 2px;
+  font-size: 9px;
   font-weight: 600;
   line-height: 1;
   color: #fff;
@@ -293,10 +297,10 @@
 }
 .trim {
   position: absolute;
-  left: 7px;
-  right: 7px;
-  bottom: 20px;
-  height: 4px;
+  left: 5px;
+  right: 5px;
+  bottom: 16px;
+  height: 3px;
   border-radius: 2px;
   background: rgba(255, 255, 255, 0.55);
   opacity: 0;
@@ -420,7 +424,11 @@
   margin-left: -1px;
   background: #fff;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
-  animation: play 14.4s linear infinite;
+  animation: play 6.13s linear infinite;
+}
+.synced .r-head {
+  animation: none;
+  left: calc(var(--p, 0) * 100%);
 }
 @keyframes play {
   from {
@@ -813,20 +821,26 @@
     flex-direction: column;
     gap: 20px;
   }
-  .r-grid,
-  .r-gridhead {
+  .r-stage > .r-fig:first-child {
+    flex: none;
     width: 100%;
-    gap: 7px;
+  }
+  .r-grid {
+    gap: 4px;
   }
   .t,
   .t.on::after {
-    border-radius: 9px;
+    border-radius: 6px;
   }
   .ck {
-    width: 16px;
-    height: 16px;
-    top: 4px;
-    right: 4px;
+    width: 12px;
+    height: 12px;
+    top: 2px;
+    right: 2px;
+  }
+  .ck svg {
+    width: 8px;
+    height: 8px;
   }
   .r-arrow {
     /* Rotating keeps the 96 × 20 layout box, so make room for the arrow's real height. */
@@ -850,19 +864,22 @@
     bottom: 4px;
     padding: 3px 4px;
   }
-  .r-cliptag span {
-    display: none;
-  }
+  /* Tiles are ~35px here: the play icon without the duration, the trim bar along the bottom. */
   .vid {
-    right: 4px;
-    bottom: 4px;
-    font-size: 9px;
+    right: 3px;
+    bottom: 3px;
+    gap: 0;
+    font-size: 0;
+  }
+  .vid svg {
+    width: 7px;
+    height: 7px;
   }
   .trim {
-    left: 5px;
-    right: 5px;
-    bottom: 16px;
-    height: 3px;
+    left: 3px;
+    right: 12px;
+    bottom: 4px;
+    height: 2px;
   }
   .r-wave {
     height: 34px;

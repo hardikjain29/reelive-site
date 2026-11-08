@@ -4,7 +4,7 @@ export const SITE = {
   url: 'https://reelive.app',
   supportEmail: 'support@reelive.app',
   /** Launch day: set to true. The buttons become App Store links and Safari shows the Smart App Banner. */
-  appStoreLive: false,
+  appStoreLive: true,
   appStoreId: '6817827655',
   appStoreUrl: 'https://apps.apple.com/app/id6817827655',
   freeReels: 2,

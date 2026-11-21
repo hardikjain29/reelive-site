@@ -25,4 +25,4 @@ Every push to `main` deploys to GitHub Pages (`.github/workflows/deploy.yml`). T
 ## Launch day
 
 1. In `src/site.ts`, set `appStoreLive: true`. The buttons become App Store links and Safari shows the Smart App Banner.
-2. Replace `public/og.png`, which still says "Coming soon to iPhone".
+2. The share image is `public/og-launch.jpg` ("Now on the App Store"; keep it under 300 KB or WhatsApp drops it). When it changes, give it a new file name and update `src/layouts/BaseLayout.astro`: WhatsApp and Facebook cache previews by the image URL.

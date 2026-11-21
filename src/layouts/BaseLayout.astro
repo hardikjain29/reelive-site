@@ -11,8 +11,10 @@ interface Props {
   description?: string;
 }
 const { title, description = SITE.description } = Astro.props;
-const canonical = new URL(Astro.url.pathname.replace(/\/index$/, '/'), SITE.url).href;
-const og = new URL('/og.png', SITE.url).href;
+// build.format 'file' makes the path /privacy.html and /index.html; share the clean URL instead.
+const canonical = new URL(Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '/'), SITE.url).href;
+// A new file name when the image changes: WhatsApp and Facebook cache link previews by image URL.
+const og = new URL('/og-launch.jpg', SITE.url).href;
 ---
 
 <!doctype html>

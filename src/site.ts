@@ -7,6 +7,13 @@ export const SITE = {
   appStoreLive: true,
   appStoreId: '6817827655',
   appStoreUrl: 'https://apps.apple.com/app/id6817827655',
+  /**
+   * App Store Connect's provider token (the `pt` of a campaign link: App Store Connect → Analytics →
+   * Acquisition → Campaigns → generate a link). With it, each short link below carries its own
+   * campaign, and App Store Connect shows page views and downloads per link. Empty = the short
+   * links open the plain listing (PostHog still counts the taps).
+   */
+  appStoreProviderToken: '',
   freeReels: 2,
   /** Visible templates, rounded down (re-count before launch). */
   templates: '1,300+',
@@ -19,6 +26,20 @@ export const SITE = {
   description:
     'Add all your photos and videos, choose the kind of reel you want, and Reelive picks the best moments and cuts them to the music.',
 } as const;
+
+/**
+ * Short links for bios, posts and stories: reelive.app/<link> opens the App Store
+ * (pages/[link].astro). Each is its own campaign; add one per new channel, never rename one
+ * that's already out in a bio.
+ */
+export const SHORT_LINKS = ['get', 'download', 'ig', 'tiktok', 'yt'] as const;
+
+/** The App Store listing, as campaign `ct` when the provider token is set. */
+export function appStoreLink(campaign?: string): string {
+  if (!campaign || !SITE.appStoreProviderToken) return SITE.appStoreUrl;
+  const query = new URLSearchParams({ pt: SITE.appStoreProviderToken, ct: campaign, mt: '8' });
+  return `https://apps.apple.com/app/apple-store/id${SITE.appStoreId}?${query}`;
+}
 
 /**
  * Who runs Reelive, for the Impressum, the Privacy Policy and the Terms.

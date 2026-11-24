@@ -21,6 +21,16 @@ Every push to `main` deploys to GitHub Pages (`.github/workflows/deploy.yml`). T
 | Landing page | `src/pages/index.astro`, `src/styles/landing.css` |
 | Shared look (colours, nav, footer, phone frame) | `src/styles/global.css` |
 | Template stills | `src/assets/stills/` (converted to WebP at build) |
+| Short links (reelive.app/ig …) | `SHORT_LINKS` in `src/site.ts`, page `src/pages/[link].astro` |
+
+## Short links
+
+`reelive.app/get`, `/download`, `/ig`, `/tiktok` and `/yt` open the App Store, for bios, posts and stories.
+GitHub Pages can't redirect, so each is a tiny page that forwards at once (about 0.3 s). On the way it sends
+PostHog `link_opened {link}` (taps per channel). Once `SITE.appStoreProviderToken` is set (`pt` from
+App Store Connect → Analytics → Acquisition → Campaigns), each link is also its own App Store campaign, and
+App Store Connect shows page views and downloads per link. To add a channel, add it to `SHORT_LINKS`; never
+rename one that's already in a bio.
 
 ## Launch day
 

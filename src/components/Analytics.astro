@@ -13,7 +13,8 @@
  * It only runs on reelive.app, after the page is idle, and only while SITE.posthogKey is set.
  *
  * Events: $pageview, $pageleave (time and scroll), cta_clicked {place},
- * faq_opened {question}, support_email_clicked. All carry origin: web.
+ * faq_opened {question}, support_email_clicked; the short links add link_opened {link}
+ * (pages/[link].astro). All carry origin: web. The setup itself is in lib/posthog.ts.
  *
  * On localhost, `?analytics=test` (with PUBLIC_POSTHOG_KEY set at build time)
  * starts PostHog without sending anything, to check what it stores.
@@ -21,36 +22,12 @@
 ---
 
 <script>
-  import { SITE } from '../site';
+  import { analyticsMode, startPosthog } from '../lib/posthog';
 
-  const host = location.hostname;
-  const test = (host === 'localhost' || host === '127.0.0.1') && new URLSearchParams(location.search).get('analytics') === 'test';
+  const mode = analyticsMode();
 
-  async function start() {
-    const { default: posthog } = await import('posthog-js/dist/module.slim');
-    posthog.init(SITE.posthogKey, {
-      api_host: 'https://eu.i.posthog.com',
-      ui_host: 'https://eu.posthog.com',
-      persistence: 'memory',
-      person_profiles: 'never',
-      respect_dnt: true,
-      capture_pageview: true,
-      capture_pageleave: true,
-      autocapture: false,
-      rageclick: false,
-      capture_dead_clicks: false,
-      capture_exceptions: false,
-      capture_heatmaps: false,
-      capture_performance: false,
-      disable_session_recording: true,
-      disable_surveys: true,
-      disable_product_tours: true,
-      disable_web_experiments: true,
-      disable_external_dependency_loading: true,
-      advanced_disable_flags: true,
-      before_send: test ? () => null : undefined,
-    });
-    posthog.register({ origin: 'web' });
+  async function start(mode: 'live' | 'test') {
+    const posthog = await startPosthog(mode, { pageviews: true });
 
     document.addEventListener('click', (event) => {
       const el = (event.target as Element | null)?.closest<HTMLElement>('[data-track], a[href^="mailto:"]');
@@ -63,11 +40,11 @@
         if (details.open) posthog.capture('faq_opened', { question: details.querySelector('summary')?.textContent?.trim() });
       })
     );
-    if (test) (window as unknown as { __posthog: unknown }).__posthog = posthog;
+    if (mode === 'test') (window as unknown as { __posthog: unknown }).__posthog = posthog;
   }
 
-  if (SITE.posthogKey && (host === 'reelive.app' || test)) {
-    if ('requestIdleCallback' in window) requestIdleCallback(() => void start());
-    else setTimeout(() => void start(), 200);
+  if (mode) {
+    if ('requestIdleCallback' in window) requestIdleCallback(() => void start(mode));
+    else setTimeout(() => void start(mode), 200);
   }
 </script>

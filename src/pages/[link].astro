@@ -1,0 +1,83 @@
+---
+/**
+ * The short links: reelive.app/get, /download, /ig, /tiktok, /yt (SHORT_LINKS in site.ts) open
+ * the App Store. GitHub Pages can't send a real redirect, so this page forwards at once. On
+ * reelive.app it first counts the tap in PostHog (link_opened {link}), which waits at most 1 s.
+ * With SITE.appStoreProviderToken set, the App Store URL carries the link as its campaign, so
+ * App Store Connect also shows page views and downloads per link.
+ *
+ * Link previews (WhatsApp, iMessage) don't follow the forward, hence the share tags here.
+ */
+import { SITE, SHORT_LINKS, appStoreLink } from '../site';
+
+export function getStaticPaths() {
+  return SHORT_LINKS.map((link) => ({ params: { link } }));
+}
+
+const { link } = Astro.params;
+const target = appStoreLink(link);
+const title = 'Reelive on the App Store';
+const og = new URL('/og-launch.jpg', SITE.url).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>{title}</title>
+    <meta name="description" content={SITE.description} />
+    <meta name="theme-color" content="#09090B" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Reelive" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={SITE.description} />
+    <meta property="og:image" content={og} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <noscript><meta http-equiv="refresh" content={`0;url=${target}`} /></noscript>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: #09090b;
+        color: #a1a1aa;
+        font: 16px/1.5 -apple-system, system-ui, sans-serif;
+      }
+      a {
+        color: #fafafa;
+      }
+    </style>
+  </head>
+  <body data-link={link} data-target={target}>
+    <p>Opening the App Store… <a href={target}>Tap here</a> if nothing happens.</p>
+
+    <script>
+      import { analyticsMode, startPosthog } from '../lib/posthog';
+
+      const { link = '', target = '' } = document.body.dataset;
+      let gone = false;
+      const go = () => {
+        if (gone) return;
+        gone = true;
+        location.replace(target);
+      };
+
+      const mode = analyticsMode();
+      if (mode) {
+        setTimeout(go, 1000);
+        startPosthog(mode, { pageviews: false }).then((posthog) => {
+          posthog.capture('link_opened', { link }, { send_instantly: true, transport: 'sendBeacon' });
+          go();
+        }, go);
+      } else {
+        go();
+      }
+    </script>
+  </body>
+</html>
